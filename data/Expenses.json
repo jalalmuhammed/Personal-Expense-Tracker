@@ -1,0 +1,37 @@
+[
+    {
+        "id": "5de5c2f6-4e03-4bd1-b28e-d840c3ff0702",
+        "date": "2025-06-10",
+        "amount": 736.0,
+        "category": "travel",
+        "description": "hampi"
+    },
+    {
+        "id": "7816b137-fa0b-4bad-9af7-7ed7f9b65ba7",
+        "date": "2025-06-23",
+        "amount": 566.0,
+        "category": "food",
+        "description": ""
+    },
+    {
+        "id": "f70e23c6-eb73-4e89-aa63-2770dcd8ee37",
+        "date": "2025-05-20",
+        "amount": 590.0,
+        "category": "misc",
+        "description": "chill"
+    },
+    {
+        "id": "988e006d-d955-4cab-8b52-36aa7f2d8861",
+        "date": "2025-06-23",
+        "amount": 85565.0,
+        "category": "food",
+        "description": "chilling with friends"
+    },
+    {
+        "id": "44d6b1e1-5712-4cc9-8c4e-d302ef1eb782",
+        "date": "2025-06-23",
+        "amount": 520.0,
+        "category": "misc",
+        "description": ""
+    }
+]
