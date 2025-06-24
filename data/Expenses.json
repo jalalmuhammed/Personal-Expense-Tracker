@@ -1,7 +1,7 @@
 [
     {
         "id": "5de5c2f6-4e03-4bd1-b28e-d840c3ff0702",
-        "date": "2025-06-10",
+        "date": "2025-05-10",
         "amount": 736.0,
         "category": "travel",
         "description": "hampi"
@@ -22,8 +22,8 @@
     },
     {
         "id": "988e006d-d955-4cab-8b52-36aa7f2d8861",
-        "date": "2025-06-23",
-        "amount": 85565.0,
+        "date": "2025-01-23",
+        "amount": 855.0,
         "category": "food",
         "description": "chilling with friends"
     },
@@ -33,5 +33,54 @@
         "amount": 520.0,
         "category": "misc",
         "description": ""
+    },
+    {
+        "id": "ccb6f12e-ff6d-4096-909d-4ad57adeafa8",
+        "date": "2025-06-24",
+        "amount": 5000.0,
+        "category": "travel",
+        "description": "last month trip"
+    },
+    {
+        "id": "57c43820-e148-490f-9742-63eee5ea4bb5",
+        "date": "2025-06-24",
+        "amount": 52.0,
+        "category": "food",
+        "description": "cafe restaurant "
+    },
+    {
+        "id": "de65ae48-1ffa-4b55-820f-0c8f0a394626",
+        "date": "2025-06-24",
+        "amount": 565.0,
+        "category": "food",
+        "description": "happy day"
+    },
+    {
+        "id": "d2ff60ac-39a1-4b86-9aef-9cc782f938de",
+        "date": "2025-06-24",
+        "amount": 556.0,
+        "category": "food",
+        "description": "aaaaaaaaaaa"
+    },
+    {
+        "id": "930b4c96-1d88-4e0c-b43c-9976b1af19a5",
+        "date": "2025-06-24",
+        "amount": 535.0,
+        "category": "travel",
+        "description": "clg with auto"
+    },
+    {
+        "id": "c513b865-62af-4a89-9e6e-fc6cf965b25c",
+        "date": "2025-06-24",
+        "amount": 255.0,
+        "category": "food",
+        "description": "just hill"
+    },
+    {
+        "id": "6d7820b9-08a0-45f0-91fd-131945278c60",
+        "date": "2025-06-24",
+        "amount": 783.0,
+        "category": "food",
+        "description": "adad"
     }
 ]

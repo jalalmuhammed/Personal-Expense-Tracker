@@ -2,10 +2,14 @@ import data_manager
 import utils
 import reporter
 
+#load expenses list from file
+expenses = data_manager.load_data()
+
 def print_menu():
     print(
         """
-     === Personal Expense Tracker ===
+    Personal Expense Tracker
+    ---------------------------
     1. Add new expense
     2. View all expenses
     3. Filter expenses by date range
@@ -22,29 +26,31 @@ def print_menu():
 #Add new expense
 def add_entry():
     amount = float(utils.validate_input(
-        "Enter Amount: ", utils.validate_amount))
+        "Enter Amount: ", utils.validate_amount).strip())
     category = str(utils.validate_input(
         "Enter Category.\n(Food,Travel,Misc,Entertainment): ",
-               utils.validate_category)).lower()
+        lambda x: utils.validate_category(x.lower()),
+        "Enter Valid Category.")).lower()
     description = input("Enter Description,(Press Enter if not): ")
     data_manager.add_new_exp(amount, category, description)
 
 #show all expense
 def view_all_exp():
-    show_data = data_manager.load_data()
     try:
         to_sort = input(
             "Do You Want To Sort By Date(Y/N): "
         ).lower()
 
         if to_sort == "y":
-            sorted_list = utils.sort_by_date(show_data)
+            sorted_list = utils.sort_by_date(expenses)
             for doc in sorted_list:
                 print(doc)
+            print(f"The Grand Total is: {reporter.total_expense(expenses)}")
 
         elif to_sort == "n":
-            for doc in show_data:
+            for doc in expenses:
                 print(doc)
+            print(f"The Grand Total is: {reporter.total_expense(expenses)}")
 
         else:
             print("Enter valid options")
@@ -57,7 +63,6 @@ def view_all_exp():
 def edit_exp():
     try:
         target_id = input("Enter Expense Id To Edit: ").strip()
-        expenses = data_manager.load_data()
         id_list = [e.get("id") for e in expenses]
         if target_id in id_list:
             print("Enter Details To Update entry."
@@ -78,7 +83,9 @@ def edit_exp():
                     break
 
             while True:
-                category = input("Enter New Category.\n (Food,Travel,Misc,Entertainment): ").strip().lower()
+                category = input("Enter New Category."
+                                 "\n (Food,Travel,Misc,Entertainment): "
+                                 ).strip().lower()
                 if category and not utils.validate_category(category):
                     print("Enter valid Category")
                 else:
@@ -148,6 +155,26 @@ def filtered_date():
 
     reporter.filter_by_date(start_date,end_date)
 
+#summarize by month
+def summarize_monthly():
+    print("Expense Month Wise Summery")
+    print("-" * 50)
+    summary = reporter.summarize_by_month()
+
+    for key, value in summary.items():
+        print(f"Expense in Month {key} is: {value}")
+    print(f"The Grand Total is: {reporter.total_expense(expenses)}")
+
+#summerize by category
+def summarize_category():
+    print("Expense Category Wise Summery")
+    print("-" * 50)
+    summary = reporter.summarize_by_category()
+
+    for key, value in summary.items():
+        print(f"Total Expense in {key} is: {value}")
+    print(f"The Grand Total is: {reporter.total_expense(expenses)}")
+
 #Main loop for menu
 def main_loop():
     while True:
@@ -185,6 +212,18 @@ def main_loop():
             elif choose == 6:
                 delete_entry()
                 break
+
+            #show monthly summery
+            elif choose == 7:
+                summarize_monthly()
+
+            #show category wise summery
+            elif choose == 8:
+                summarize_category()
+
+            #export expenses into csv file
+            elif choose == 9:
+                pass
 
             else:
                 print("Invalid option. Please choose a valid menu item.")

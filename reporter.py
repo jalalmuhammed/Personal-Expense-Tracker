@@ -1,12 +1,21 @@
+
+import constants
 import data_manager
-from datetime import datetime
-
 import utils
+from collections import defaultdict
 
+#loading the file
+expenses = data_manager.load_data()
+
+#Total expense
+def total_expense(expenses):
+    total_expense = 0
+    for expense in expenses:
+        total_expense += expense["amount"]
+    return total_expense
 
 #filter by category
 def filter_by_category(category):
-    expenses = data_manager.load_data()
     category = category.strip()
     try:
         filtered_list = []
@@ -22,6 +31,7 @@ def filter_by_category(category):
             print(f"Expense Entry Found In The Category '{category}'")
             for exp in sorted_list:
                 print(exp)
+            print(f"The Grand Total is: {total_expense(sorted_list)}")
 
         else:
             print(f"No Expense Entry Found In The Category '{category}'")
@@ -29,9 +39,9 @@ def filter_by_category(category):
     except Exception as e:
         print(f"Error Occurred: {e}")
 
+
 #filter by date range
 def filter_by_date(start_date,end_date):
-    expenses = data_manager.load_data()
     filtered_exp_list = []
 
     # checking whether an expense lies between start and end date.
@@ -46,5 +56,25 @@ def filter_by_date(start_date,end_date):
         print(f"Expense Found From {start_date} to {end_date}.")
         for exp in sorted_list:
             print(exp)
+        print(f"The Grand Total is: {total_expense(sorted_list)}")
+
     else:
         print(f"No Expense Found From {start_date} to {end_date}.")
+
+#summarize by month
+def summarize_by_month():
+    summary = defaultdict(float)
+
+    for expense in expenses:
+        month_key = expense["date"][:7]
+        summary[month_key] += expense["amount"]
+    return dict(summary)
+
+
+#summarize expense by category
+def summarize_by_category():
+    summery = defaultdict(float)
+
+    for expense in expenses:
+        summery[expense["category"]] += expense["amount"]
+    return dict(summery)
