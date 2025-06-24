@@ -1,6 +1,8 @@
 import data_manager
 import utils
 import reporter
+import csv
+import os
 
 #load expenses list from file
 expenses = data_manager.load_data()
@@ -175,6 +177,46 @@ def summarize_category():
         print(f"Total Expense in {key} is: {value}")
     print(f"The Grand Total is: {reporter.total_expense(expenses)}")
 
+#import summaries into csv file
+def export_to_csv(summary, file_name,head):
+    file_path = os.path.join("Exported summaries", file_name)
+
+    with open(file_path, "w", newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([head, "Total Amount"])
+        for key, total in summary.items():
+            writer.writerow([key, total])
+
+def import_to_csv():
+    print("How Do You Want To Import Summaries Into Csv")
+    choice = int(input("1: Monthly Summary, 2: Categorical Summary : "))
+
+    if choice == 1:
+        summary = reporter.summarize_by_month()
+        file_name = input("Enter File Name To Save: ").strip()
+        if not file_name.endswith(".csv"):
+            file_name += ".csv"
+        try:
+            export_to_csv(summary,file_name,"Months")
+            print(f"Monthly Summery Saved Into: {file_name}")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+
+    elif choice == 2:
+        summary = reporter.summarize_by_category()
+        file_name = input("Enter File Name To Save: ").strip()
+        if not file_name.endswith(".csv"):
+            file_name += ".csv"
+        try:
+            export_to_csv(summary, file_name,"Category")
+            print(f"Monthly Summery Saved Into: {file_name}")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+
+    else:
+        print("invalid option!")
+        return
+
 #Main loop for menu
 def main_loop():
     while True:
@@ -223,7 +265,7 @@ def main_loop():
 
             #export expenses into csv file
             elif choose == 9:
-                pass
+                import_to_csv()
 
             else:
                 print("Invalid option. Please choose a valid menu item.")

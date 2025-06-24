@@ -1,5 +1,4 @@
 import os
-import data_manager
 
 Data_folder = "data"
 Data_file = os.path.join(Data_folder,"Expenses.json")
