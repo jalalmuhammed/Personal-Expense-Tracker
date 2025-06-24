@@ -75,11 +75,11 @@ def edit_expense(target_id,new_date=None,new_amount=None,new_category=None,new_d
     expense = load_data()
     target_id = target_id.strip()
     found = False
+    flag = False
 
     for exp in expense:
         if exp.get("id") == target_id:
             found = True
-            flag = False
             if new_date != '':
                 exp["date"] = new_date
                 flag = True

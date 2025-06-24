@@ -17,6 +17,14 @@ def validate_date(date_str):
     except ValueError:
         return False
 
+#sorting expense by date
+def sort_by_date(list_to_sort):
+    sorted_list = sorted(
+                list_to_sort,
+                key= lambda x: datetime.strptime(x["date"], "%Y-%m-%d")
+            )
+    return sorted_list
+
 #validate amount
 def validate_amount(amount):
     try:

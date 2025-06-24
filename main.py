@@ -1,5 +1,6 @@
 import data_manager
 import utils
+import reporter
 
 def print_menu():
     print(
@@ -20,17 +21,37 @@ def print_menu():
 
 #Add new expense
 def add_entry():
-    amount = float(utils.validate_input("Enter Amount: ", utils.validate_amount))
-    category = str(utils.validate_input("Enter Category.\n (Food,Travel,Misc,Entertainment): ",
-                                        utils.validate_category)).lower()
+    amount = float(utils.validate_input(
+        "Enter Amount: ", utils.validate_amount))
+    category = str(utils.validate_input(
+        "Enter Category.\n(Food,Travel,Misc,Entertainment): ",
+               utils.validate_category)).lower()
     description = input("Enter Description,(Press Enter if not): ")
     data_manager.add_new_exp(amount, category, description)
 
 #show all expense
 def view_all_exp():
     show_data = data_manager.load_data()
-    for doc in show_data:
-        print(doc)
+    try:
+        to_sort = input(
+            "Do You Want To Sort By Date(Y/N): "
+        ).lower()
+
+        if to_sort == "y":
+            sorted_list = utils.sort_by_date(show_data)
+            for doc in sorted_list:
+                print(doc)
+
+        elif to_sort == "n":
+            for doc in show_data:
+                print(doc)
+
+        else:
+            print("Enter valid options")
+            return
+    except Exception as e:
+        print(f"Error occurred {e}")
+
 
 #Edit an expense entry
 def edit_exp():
@@ -39,7 +60,8 @@ def edit_exp():
         expenses = data_manager.load_data()
         id_list = [e.get("id") for e in expenses]
         if target_id in id_list:
-            print("Enter Details To Update entry.\nClick Enter If You Don't Want To Change.")
+            print("Enter Details To Update entry."
+                  "\nClick Enter If You Don't Want To Change.")
 
             while True:
                 date = input("Enter New Date: ").strip()
@@ -87,9 +109,12 @@ def edit_exp():
 
 #delete an expense entry
 def delete_entry():
-    removable_id = str(input("Enter the id to remove the expense: ").strip())
+    removable_id = str(input(
+        "Enter the id to remove the expense: "
+    ).strip())
     if data_manager.delete_expense(removable_id):
-        print(f"Expense Entry Deletion Successful.\n ID No: {removable_id} ")
+        print(f"Expense Entry Deletion Successful."
+              f"\n ID No: {removable_id} ")
 
     # user verifying the deletion
     see_update = input("Do you want to see the Updated expense List (y/n): ")
@@ -97,6 +122,31 @@ def delete_entry():
         updated_expense = data_manager.load_data()
         for doc in updated_expense:
             print(doc)
+
+#filter expense by category
+def filtered_category():
+    #validating user entered category then passing to the function
+
+    category = str(
+        utils.validate_input("Enter Category."
+                             "\n(Food,Travel,Misc,Entertainment): ",
+                             utils.validate_category,
+                             "Enter Valid Category!")).lower()
+
+    reporter.filter_by_category(category)
+
+#filter by date range
+def filtered_date():
+    #validating user entered start and end date and then passing them to the function
+
+    start_date = utils.validate_input(
+        "Start Date: ",utils.validate_date,
+        "Enter Valid Date").strip()
+    end_date = utils.validate_input(
+        "End Date: ", utils.validate_date,
+        "Enter Valid Date").strip()
+
+    reporter.filter_by_date(start_date,end_date)
 
 #Main loop for menu
 def main_loop():
@@ -118,6 +168,14 @@ def main_loop():
             elif choose == 2:
                view_all_exp()
                break
+
+            #Filter Expense By Date Range
+            elif choose == 3:
+                filtered_date()
+
+            #Filter Expense By Category
+            elif choose == 4:
+                filtered_category()
 
             #edit an expense
             elif choose == 5:
