@@ -1,5 +1,4 @@
 
-import constants
 import data_manager
 import utils
 from collections import defaultdict
@@ -8,11 +7,11 @@ from collections import defaultdict
 expenses = data_manager.load_data()
 
 #Total expense
-def total_expense(expenses):
-    total_expense = 0
-    for expense in expenses:
-        total_expense += expense["amount"]
-    return total_expense
+def total_expense(expensed):
+    total_expenses = 0
+    for expense in expensed:
+        total_expenses += expense["amount"]
+    return total_expenses
 
 #filter by category
 def filter_by_category(category):
