@@ -40,8 +40,8 @@ This is a command-line based **Personal Expense Tracker** written in Python. It 
 Make sure you have Python 3.x installed.
 
 ```bash
-git clone https://github.com/yourusername/expense-tracker
-cd expense-tracker
+git clone https://github.com/jalalmuhammed/Personal-Expense-Tracker
+cd Personal-Expense-Tracker
 python main.py
 ```
 
