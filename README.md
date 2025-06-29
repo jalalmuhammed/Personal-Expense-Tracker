@@ -40,7 +40,7 @@ This is a command-line based **Personal Expense Tracker** written in Python. It 
 Make sure you have Python 3.x installed.
 
 ```bash
-git clone https://github.com/jalalmuhammed/Personal-Expense-Tracker
+git clone https://github.com/jalalmuhammed/Personal-Expense-Tracker.git
 cd Personal-Expense-Tracker
 python main.py
 ```
